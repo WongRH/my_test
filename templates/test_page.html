@@ -1,0 +1,89 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Home</title>
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!-- //Custom Theme files -->
+    <link href="{% static 'css/bootstrap.css' %}" type="text/css" rel="stylesheet" media="all">
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="all">
+    <!-- js -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap-3.1.1.min.js' %}"></script>
+    <!-- //js -->
+    <script src="{% static 'js/simpleCart.min.js' %}"></script>
+    <!-- cart -->
+</head>
+<body>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        {% for cag in cags %}
+
+            <li class="dropdown">
+                <a href="{{ cag.cag_link }}" class="dropdown-toggle" data-toggle="dropdown">{{ cag.cag_name }}<b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu multi-column columns-4">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>By {{ cag.cag_name }}</h4>
+                            <ul class="multi-column-dropdown">
+                                {% for goods in cag.goodslist_set.all %}
+                                    <li><a class="list" href="{{ goods.goods_link }}">{{ goods.goods_name }}</a></li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </ul>
+            </li>
+        {% endfor %}
+
+
+    </ul>
+    <!--/.navbar-collapse-->
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="site_con">
+    <form method="post" action="{% url 'test1:add_handle' %}">
+        {% csrf_token %}
+        <div class="form_group">
+            <label>Add Category:</label>
+            <input type="text" name="cag_name" placeholder="分类名，如果没有就会新建">
+        </div>
+        <div class="form_group form_group2">
+            <label>Add Goods:</label>
+            <textarea class="site_area" name="goods_name" placeholder="详细商品名"></textarea>
+        </div>
+
+        <input type="submit" name="" value="submit" class="info_submit">
+    </form>
+</div>
+</body>
+</html>
